@@ -1,0 +1,45 @@
+[alias]
+
+  # log
+  lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' master --branches -n 15
+
+  # add
+  a = add
+  au = add -u
+  aa = add -A
+
+  # commit
+  cm = commit -m
+
+  # diff
+  d = diff
+
+  # status
+  s = status
+
+  # checkout
+  co = checkout
+  cob = checkout -b
+
+  # push
+  pso = push origin
+
+  # pull
+  puo = pull --rebase origin
+
+  # rebase
+  reb = rebase
+
+  # branch
+  # list branches sorted by last modified
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+  # blame
+  bl = blame
+
+  # list aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+[user]
+	name = Tom Li
+	email = tom@affinity.co
