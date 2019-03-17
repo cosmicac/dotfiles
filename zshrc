@@ -12,6 +12,10 @@ export TERM="xterm-256color"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
+# Powerlevel9K prompt customization.
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+POWERLEVEL9K_STATUS_OK=false
+
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -94,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+ssh-add
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -106,12 +111,13 @@ alias zshconfig="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias cl=clear
 
-# Alias for bin/manage-migrations, a tool to manage migrations.
-alias mm=bin/manage-migrations.rb
+# Functions.
 
-# Include adb in path.
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+# Search and open a file with Vim.
+function vimo() {
+  local FILE=$(ag -g $1)
+  vim $FILE
+}
 
 # Zsh syntax highlighting.
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
