@@ -13,6 +13,10 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Typescript syntax files for vim.
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+" Stylus syntax files for vim.
+Plug 'iloginow/vim-stylus'
 
 " Fzf.
 Plug '/usr/local/opt/fzf'
@@ -47,6 +51,12 @@ Plug 'airblade/vim-gitgutter'
 
 " Colorschemes.
 Plug 'flazz/vim-colorschemes'
+
+" Indent guides
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Easily transition between multi-line and one line code.
+Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()
 
@@ -108,6 +118,7 @@ let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_ruby_rubocop_options = 'Metrics/MethodLength Enabled: false'
 let g:ale_completion_enabled = 1
 
 " Workaround for a bug where ALE autocompletes too fast in .js files.
@@ -121,3 +132,16 @@ let g:lightline = {
   \ }
   \ }
 
+" Force Vim to recognize .tsx files as Typescript so syntax highlighting works.
+augroup SyntaxSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup END
+
+" Copy current filename to clipboard.
+nmap ,cl :let @*=expand("%:p")<CR>
+
+" Splitjoin variables
+let g:splitjoin_ruby_hanging_args = 0
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_ruby_curly_braces = 0
