@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tom/.oh-my-zsh"
+export ZSH="/Users/TomLi/.oh-my-zsh"
 
 # 256 colors.
 export TERM="xterm-256color"
@@ -10,11 +10,7 @@ export TERM="xterm-256color"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-# Powerlevel9K prompt customization.
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
-POWERLEVEL9K_STATUS_OK=false
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -27,7 +23,7 @@ POWERLEVEL9K_STATUS_OK=false
 # CASE_SENSITIVE="true"
 
 # Set default user to hide prompt when logged in as the default user.
-DEFAULT_USER="tom"
+DEFAULT_USER="TomLi"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -74,6 +70,7 @@ DEFAULT_USER="tom"
 plugins=(
   git
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 
@@ -98,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-ssh-add
+# ssh-add
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -110,6 +107,7 @@ ssh-add
 alias zshconfig="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias cl=clear
+alias l="exa -l"
 
 # Functions.
 
@@ -119,5 +117,4 @@ function vimo() {
   vim $FILE
 }
 
-# Zsh syntax highlighting.
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

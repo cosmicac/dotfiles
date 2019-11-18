@@ -11,19 +11,18 @@ call plug#begin()
 " Prettier.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
+" Nord theme.
+Plug 'arcticicestudio/nord-vim'
+
 " Typescript syntax files for vim.
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
 " Stylus syntax files for vim.
 Plug 'iloginow/vim-stylus'
-
 " Fzf.
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-
-" Linter/fixer.
-Plug 'w0rp/ale'
 
 " Navigate between tmux and vim.
 Plug 'christoomey/vim-tmux-navigator'
@@ -58,6 +57,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Easily transition between multi-line and one line code.
 Plug 'AndrewRadev/splitjoin.vim'
 
+" Linter/fixer.
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
 " Set mouse scrolling.
@@ -83,8 +85,8 @@ set textwidth=90
 " let g:solarized_termtrans=1 "this is what fixed it for me
 " colorscheme solarized
 
-" Ryuuko color scheme.
-colorscheme ryuuko
+" Nord color scheme.
+colorscheme nord
 syntax enable
 
 " Splits stuff.
@@ -111,7 +113,6 @@ set hlsearch
 nnoremap <c-p> :FZF<cr>
 
 " ALE config.
-let g:ale_fixers = {}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['prettier'],
@@ -126,7 +127,7 @@ set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Lightline config.
 let g:lightline = {
-  \ 'colorscheme': 'seoul256',
+  \ 'colorscheme': 'nord',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
   \ }
