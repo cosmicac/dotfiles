@@ -117,4 +117,18 @@ function vimo() {
   vim $FILE
 }
 
+# Make FZF use fd by default, which is a faster version of find and respects .gitignore
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Make FZF tab completion use fd as well.
+_fzf_compgen_path() {
+  fd --type f . "$1"
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Zsh syntax highlighting.
+source /Users/tomli/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Change Zsh autosuggestions color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
