@@ -1,0 +1,5 @@
+## Rename files in directory matching $PATTERN with $REPLACEMENT
+ag -l | rename -s $PATTERN $REPLACEMENT
+
+## Rename files in directory matching $PATTERN with $REPLACEMENT, with a dry run.
+ag -l | rename -n -s $PATTERN $REPLACEMENT
