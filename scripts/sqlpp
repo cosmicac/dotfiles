@@ -1,0 +1,14 @@
+#!/usr/local/bin/python3
+
+import sqlparse
+import sys
+
+if len(sys.argv) > 1:
+    sql_file = sys.argv[1]
+    sql = open(sql_file, "r").read()
+else:
+    sql = sys.stdin.read()
+
+print(sqlparse.format(sql, reindent=True, keyword_case='upper'))
+
+

@@ -3,3 +3,10 @@ ag -l | rename -s $PATTERN $REPLACEMENT
 
 ## Rename files in directory matching $PATTERN with $REPLACEMENT, with a dry run.
 ag -l | rename -n -s $PATTERN $REPLACEMENT
+
+## Rename the name of a Component in React along with corresponding CSS classes from
+## $OLD_CLASS to $NEW_CLASS
+codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,styl 'NewCompanyCard' 'NcnCard'
+codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,styl 'new-company-card' 'ncn-card'
+ag -l | rename -n -s new-company-card ncn-card
+ag -l | rename -s new-company-card ncn-card
