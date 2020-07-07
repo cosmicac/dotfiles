@@ -145,4 +145,10 @@ eval "$(rbenv init -)"
 source /Users/tomli/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Change Zsh autosuggestions color
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=245'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+# AWS credentials.
+export AWS_MFA_ARN='arn:aws:iam::798215447140:mfa/tom'
+export AWS_ACCESS_KEY_ID=ASIA3TWKZEJSPOX2XNJ7
+export AWS_SECRET_ACCESS_KEY=ozKb0p911JjAYx5acsNRaNzciQ6zzmX1eN+ex/XY
+export AWS_SESSION_TOKEN=FwoGZXIvYXdzEDkaDPabBJcqpxJlM5rcziKGAe8NL3WGgJYQ7tsHBWqcnGHwJbYNEXEB9YBDPDZn/rIuUDKaw1OVI2NkTOUGxdaU4uAGz1spTYvD0FfHtaOh3UE6F6fbuateb5skBeAWkAbW70B+5bwip3eWXYKksVgh/aLUX/lIJAjDmIyFIzp5jIskMABEUXbNH/1iWiUI7+3G2gAJvltiKLevovMFMii1/TcUaD93vGjExx2aGMTzwCIIjOTwe0n73nLhEh2Cem6muOEHFLd6

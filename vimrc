@@ -8,11 +8,14 @@ endif
 " vim.plug
 call plug#begin() 
 
+" Xterm color table.
+Plug 'guns/xterm-color-table.vim'
+
+" Palenight theme.
+Plug 'drewtempelmeyer/palenight.vim'
+
 " Prettier.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-" Nord theme.
-Plug 'arcticicestudio/nord-vim'
 
 " Typescript syntax files for vim.
 Plug 'leafgarland/typescript-vim'
@@ -20,9 +23,13 @@ Plug 'peitalin/vim-jsx-typescript'
 
 " Stylus syntax files for vim.
 Plug 'iloginow/vim-stylus'
+
 " Fzf.
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Linter/fixer.
+Plug 'dense-analysis/ale'
 
 " Navigate between tmux and vim.
 Plug 'christoomey/vim-tmux-navigator'
@@ -57,9 +64,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Easily transition between multi-line and one line code.
 Plug 'AndrewRadev/splitjoin.vim'
 
-" Linter/fixer.
-Plug 'dense-analysis/ale'
-
 call plug#end()
 
 " Set mouse scrolling.
@@ -79,14 +83,9 @@ set regexpengine=1
 " Set text width.
 set textwidth=90
 
-" Solarized color scheme.
-" syntax enable
-" set background=dark
-" let g:solarized_termtrans=1 "this is what fixed it for me
-" colorscheme solarized
-
 " Nord color scheme.
-colorscheme nord
+set background=dark
+colorscheme palenight
 syntax enable
 
 " Splits stuff.
@@ -102,6 +101,9 @@ nnoremap <C-J> <C-W><C-K>
 nnoremap <C-K> <C-W><C-L>
 nnoremap <C-L> <C-W><C-H>
 nnoremap <C-H> <C-W><C-J>
+
+" Insert space before paste.
+nnoremap <leader>p li<space><esc>p
 
 " Highlight search.
 set hlsearch
@@ -127,11 +129,18 @@ set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Lightline config.
 let g:lightline = {
-  \ 'colorscheme': 'nord',
+  \ 'colorscheme': 'palenight',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
   \ }
   \ }
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " Force Vim to recognize .tsx files as Typescript so syntax highlighting works.
 augroup SyntaxSettings
@@ -141,6 +150,9 @@ augroup END
 
 " Copy current filename to clipboard.
 nmap ,cl :let @*=expand("%:p")<CR>
+
+" Highlight current  column.
+set cursorcolumn
 
 " Splitjoin variables
 let g:splitjoin_ruby_hanging_args = 0
