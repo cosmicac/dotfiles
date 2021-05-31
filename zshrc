@@ -108,8 +108,32 @@ alias agq="ag -Q"
 alias agg="ag -g"
 alias grb="git branch --sort=-committerdate | head -n 10"
 alias gcurb="git rev-parse --abbrev-ref HEAD"
+alias react-component-set
+
 
 # Functions.
+
+# Function to create a React Component + scss file.
+#
+# First argument ($1):
+#   Should be the directory of the new Component.
+# Second argument ($2):
+#   Should be the base name of the new Component (e.g. opp-header for OppHeaderComponent)
+function create-react-component() {
+  local component_path=$1/$2-component
+
+  # Create files.
+  cp ~/react-component-template/generic-component.tsx $component_path.tsx
+  cp ~/react-component-template/generic-component.scss $component_path.scss
+
+  local hyphen_case_name=$2
+  local camel_case_name=$(gsed -r 's/(^|-)(\w)/\U\2/g' <<< $hyphen_case_name)
+
+  # Replace names.
+  gsed -i "s/generic/$hyphen_case_name/g" $component_path.tsx
+  gsed -i "s/Generic/$camel_case_name/g" $component_path.tsx
+  gsed -i "s/generic/$hyphen_case_name/g" $component_path.scss
+}
 
 # Search and open a file with Vim.
 function vimo() {
@@ -146,9 +170,3 @@ source /Users/tomli/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Change Zsh autosuggestions color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-# AWS credentials.
-export AWS_MFA_ARN='arn:aws:iam::798215447140:mfa/tom'
-export AWS_ACCESS_KEY_ID=ASIA3TWKZEJSPOX2XNJ7
-export AWS_SECRET_ACCESS_KEY=ozKb0p911JjAYx5acsNRaNzciQ6zzmX1eN+ex/XY
-export AWS_SESSION_TOKEN=FwoGZXIvYXdzEDkaDPabBJcqpxJlM5rcziKGAe8NL3WGgJYQ7tsHBWqcnGHwJbYNEXEB9YBDPDZn/rIuUDKaw1OVI2NkTOUGxdaU4uAGz1spTYvD0FfHtaOh3UE6F6fbuateb5skBeAWkAbW70B+5bwip3eWXYKksVgh/aLUX/lIJAjDmIyFIzp5jIskMABEUXbNH/1iWiUI7+3G2gAJvltiKLevovMFMii1/TcUaD93vGjExx2aGMTzwCIIjOTwe0n73nLhEh2Cem6muOEHFLd6

@@ -83,8 +83,9 @@ set regexpengine=1
 " Set text width.
 set textwidth=90
 
-" Nord color scheme.
+" Color scheme.
 set background=dark
+set t_Co=256
 colorscheme palenight
 syntax enable
 
@@ -139,6 +140,8 @@ let g:lightline = {
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
 " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
 if (has("termguicolors"))
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
@@ -158,3 +161,6 @@ set cursorcolumn
 let g:splitjoin_ruby_hanging_args = 0
 let g:splitjoin_trailing_comma = 1
 let g:splitjoin_ruby_curly_braces = 0
+
+" Prevent Vim from hanging when trying to highlight syntax in large files.
+set redrawtime=10000

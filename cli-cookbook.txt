@@ -6,10 +6,14 @@ ag -l | rename -n -s $PATTERN $REPLACEMENT
 
 ## Rename the name of a Component in React along with corresponding CSS classes from
 ## $OLD_CLASS to $NEW_CLASS
-codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,styl 'NewCompanyCard' 'NcnCard'
-codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,styl 'new-company-card' 'ncn-card'
+codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,scss,styl 'NewCompanyCard' 'NcnCard'
+codemod -d assets/javascripts/ --extensions ts,tsx,js,jsx,scss,styl 'new-company-card' 'ncn-card'
 ag -l | rename -n -s new-company-card ncn-card
 ag -l | rename -s new-company-card ncn-card
 
 ## Kill process bound on a particular port.
 fuser -k $PORT/tcp
+
+## Search and replace within a file, modifying it in place.
+## (Could use codemod, but this is useful in a script)
+sed -i '' 's/oldword/newword/' file1.txt
