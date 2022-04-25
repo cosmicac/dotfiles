@@ -119,11 +119,12 @@ nnoremap <c-p> :FZF<cr>
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['prettier'],
-\   'ruby': ['rubocop'],
+\   'ruby': ['prettier'],
 \}
 let g:ale_fix_on_save = 1
-let g:ale_ruby_rubocop_options = 'Metrics/MethodLength Enabled: false'
 let g:ale_completion_enabled = 1
+let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_prettier_executable = '/usr/local/bin/prettier'
 
 " Workaround for a bug where ALE autocompletes too fast in .js files.
 set completeopt=menu,menuone,preview,noselect,noinsert

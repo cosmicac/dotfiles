@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/usr/local/opt/terraform@0.11/bin:/Users/tomli/software/scripts:$PATH
@@ -133,6 +135,9 @@ function create-react-component() {
   gsed -i "s/generic/$hyphen_case_name/g" $component_path.tsx
   gsed -i "s/Generic/$camel_case_name/g" $component_path.tsx
   gsed -i "s/generic/$hyphen_case_name/g" $component_path.scss
+
+  echo "Created $component_path.tsx"
+  echo "Created $component_path.scss"
 }
 
 # Search and open a file with Vim.
@@ -170,3 +175,8 @@ source /Users/tomli/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Change Zsh autosuggestions color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+# Load Affinity's local dev profile.
+source ~/workspace/affinity/.profile_dev
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/zshrc.post.zsh"
