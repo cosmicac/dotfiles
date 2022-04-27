@@ -1,0 +1,6 @@
+# Ctags
+tags
+.gutctags
+
+# Mac
+.DS_Store

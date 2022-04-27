@@ -8,6 +8,12 @@ endif
 " vim.plug
 call plug#begin() 
 
+" Vim Ruby
+Plug 'vim-ruby/vim-ruby'
+
+" Gutentags manages ctags.
+Plug 'ludovicchabant/vim-gutentags'
+
 " Xterm color table.
 Plug 'guns/xterm-color-table.vim'
 
@@ -25,7 +31,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'iloginow/vim-stylus'
 
 " Fzf.
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Linter/fixer.
@@ -77,11 +83,8 @@ set relativenumber
 set number
 set ruler
 
-" Set regex engine.
-set regexpengine=1
-
 " Set text width.
-set textwidth=90
+set textwidth=100
 
 " Color scheme.
 set background=dark
@@ -97,11 +100,15 @@ set splitbelow
 " Set default clipboard to system clipboard.
 set clipboard=unnamed
 
+" Remap jump to definition
+nnoremap <C-Y> <C-]>
+
 " Easier split navigation.
 nnoremap <C-J> <C-W><C-K>
 nnoremap <C-K> <C-W><C-L>
 nnoremap <C-L> <C-W><C-H>
 nnoremap <C-H> <C-W><C-J>
+
 
 " Insert space before paste.
 nnoremap <leader>p li<space><esc>p
@@ -115,6 +122,12 @@ set hlsearch
 " Map FZF to <c-p> 
 nnoremap <c-p> :FZF<cr>
 
+" Exclude frontend files from gutentags.
+let g:gutentags_ctags_exclude = [
+      \ '*.js', '*.jsx', '*.ts', '*.tsx',
+      \ '*.scss', '.css', '*.sass',
+      \ ]
+
 " ALE config.
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
@@ -125,9 +138,6 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_javascript_prettier_use_global = 1
 let g:ale_javascript_prettier_executable = '/usr/local/bin/prettier'
-
-" Workaround for a bug where ALE autocompletes too fast in .js files.
-set completeopt=menu,menuone,preview,noselect,noinsert
 
 " Lightline config.
 let g:lightline = {

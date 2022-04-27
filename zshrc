@@ -1,21 +1,21 @@
-# Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/usr/local/opt/terraform@0.11/bin:/Users/tomli/software/scripts:$PATH
+
+# Add personal scripts.
+export PATH=/Users/tomli/software/scripts:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/tomli/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -26,17 +26,16 @@ ZSH_THEME="robbyrussell"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -48,6 +47,9 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -67,11 +69,11 @@ ZSH_THEME="robbyrussell"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,17 +93,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-# ssh-add
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshconfig="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias cl=clear
@@ -111,40 +107,6 @@ alias agg="ag -g"
 alias grb="git branch --sort=-committerdate | head -n 10"
 alias gcurb="git rev-parse --abbrev-ref HEAD"
 alias react-component-set
-
-
-# Functions.
-
-# Function to create a React Component + scss file.
-#
-# First argument ($1):
-#   Should be the directory of the new Component.
-# Second argument ($2):
-#   Should be the base name of the new Component (e.g. opp-header for OppHeaderComponent)
-function create-react-component() {
-  local component_path=$1/$2-component
-
-  # Create files.
-  cp ~/react-component-template/generic-component.tsx $component_path.tsx
-  cp ~/react-component-template/generic-component.scss $component_path.scss
-
-  local hyphen_case_name=$2
-  local camel_case_name=$(gsed -r 's/(^|-)(\w)/\U\2/g' <<< $hyphen_case_name)
-
-  # Replace names.
-  gsed -i "s/generic/$hyphen_case_name/g" $component_path.tsx
-  gsed -i "s/Generic/$camel_case_name/g" $component_path.tsx
-  gsed -i "s/generic/$hyphen_case_name/g" $component_path.scss
-
-  echo "Created $component_path.tsx"
-  echo "Created $component_path.scss"
-}
-
-# Search and open a file with Vim.
-function vimo() {
-  local FILE=$(ag -g $1)
-  vim $FILE
-}
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -157,26 +119,13 @@ _fzf_compgen_path() {
   fd --type f . "$1"
 }
 
-# Start rbenv
-eval "$(rbenv init -)"
+# FZF Colors
+export FZF_DEFAULT_OPTS='
+  --color=bg+:#717cb4,prompt:#eeffff,pointer:#eeffff,hl:#c3e88d,hl+:#c3e88d
+'
 
-# Print a newline before the prompt, unless it's the
-# first prompt in the process.
-# function precmd() {
-#   if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
-#     NEW_LINE_BEFORE_PROMPT=1
-#   elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
-#     echo "\n"
-#   fi
-# }
-
-# Zsh syntax highlighting.
-source /Users/tomli/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Change Zsh autosuggestions color
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 # Load Affinity's local dev profile.
 source ~/workspace/affinity/.profile_dev
 
-# Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+# Start rbenv
+eval "$(rbenv init -)"
