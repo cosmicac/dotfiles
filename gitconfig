@@ -55,17 +55,15 @@
   diffFilter = delta --color-only --features=interactive
 
 [delta]
-  features = coracias-caudatus
+  navigate = true
+  light = false
+  line-numbers = true
   side-by-side = true
+  minus-style = 'syntax "#660d19"'
+  plus-style = 'syntax "#137572"'
 
-[delta "interactive"]
-  keep-plus-minus-markers = false
+[merge]
+  conflictstyle = diff3
 
-[delta "decorations"]
-  commit-decoration-style = blue ol
-  commit-style = raw
-  file-style = omit
-  hunk-header-decoration-style = blue box
-  hunk-header-file-style = red
-  hunk-header-line-number-style = "#067a00"
-  hunk-header-style = file line-number syntax
+[diff]
+  colorMoved = default
