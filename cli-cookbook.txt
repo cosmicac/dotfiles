@@ -17,3 +17,32 @@ fuser -k $PORT/tcp
 ## Search and replace within a file, modifying it in place.
 ## (Could use codemod, but this is useful in a script)
 sed -i '' 's/oldword/newword/' file1.txt
+
+# In a SQL query, get only the numbers that match a column filter.
+#
+# Example Query:
+#
+# SELECT *
+# FROM "local_person_values"
+# WHERE ((("org_id" = 4223)
+#         AND ("entity_attribute_id" = 2317495)
+#         AND ("person_id" = 115254401))
+#        OR (("org_id" = 4223)
+#            AND ("entity_attribute_id" = 2317496)
+#            AND ("person_id" = 115254401)))
+#
+# This would output
+# 
+# 2317495
+# 2317496
+# 
+# Put this into regex101.com to see an explanation, basically, we match an exact string, and then
+# use a capturing group to get the ID, and then use \K to ignore the previous stuff.
+ag -o '"entity_attribute_id" = \K(\d+)' long-gfv-query.sql
+
+# Search for Model.create use cases - key is the negative lookahead (?! ...phrase to exclude... )
+ag '(LocalCompanyValue|...other model names...|CleanLocalOppValueChange)\.create(?!_with_private_model)'
+
+# Search for FactoryBot .create use cases of a certain model, includes \s+ to account for a new line
+# between create and the factory name.
+ag 'create\(\s+:local_company_value'
