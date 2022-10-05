@@ -47,7 +47,7 @@ ag '(LocalCompanyValue|...other model names...|CleanLocalOppValueChange)\.create
 # between create and the factory name.
 ag 'create\(\s+:local_company_value'
 
-# Using xargs to run rubocop/yarn on staged files
+# Using xargs to run rubocop/yarn on changed files
 git diff --name-only | xargs yarn prettier-write
 git diff --name-only | xargs rubocop -A
 

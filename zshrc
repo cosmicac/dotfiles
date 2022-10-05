@@ -107,21 +107,40 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+#
+# Config stuff
 alias zshconfig="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
+
+# Generic utility aliases.
 alias cl=clear
 alias l="exa -l"
 alias agq="ag -Q"
 alias agg="ag -g"
+
+# Git stuff.
 alias grb="git branch --sort=-committerdate | head -n 10"
 alias gcurb="git rev-parse --abbrev-ref HEAD"
+
+# Prettier
 alias prettier="~/.config/yarn/global/node_modules/prettier/bin-prettier.js"
+
+# Not sure what this is.
 alias react-component-set
+
+# Affinity specific stuff
 alias deploy-scale-dry="aws s3 sync performance_tests/api_tests/dist/ s3://scale-load-tests --sse --delete --dryrun --exclude \"*.csv\" --exclude \"*.json\""
 alias deploy-scale-real="aws s3 sync performance_tests/api_tests/dist/ s3://scale-load-tests --sse --delete --exclude \"*.csv\" --exclude \"*.json\""
 alias ber="bundle exec ruby"
 alias dms="DISABLE_MODEL_SCHEMA=1"
+
+# Pretty print sql.
 alias pretty-sql="sql-formatter --config ~/software/sql-formatter/config.json"
+
+# Running stuff on changed files.
+alias prettier-changes="git diff --name-only | xargs yarn prettier-write"
+alias rubocop-changes="git diff --name-only | xargs rubocop -A"
+alias test-changes="git diff --name-only | grep _test | xargs -L 1 bundle exec ruby"
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
