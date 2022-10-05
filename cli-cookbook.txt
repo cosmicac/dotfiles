@@ -46,3 +46,6 @@ ag '(LocalCompanyValue|...other model names...|CleanLocalOppValueChange)\.create
 # Search for FactoryBot .create use cases of a certain model, includes \s+ to account for a new line
 # between create and the factory name.
 ag 'create\(\s+:local_company_value'
+
+# Using xargs to run rubocop/yarn on staged files
+git diff --name-only | xargs yarn prettier-write
