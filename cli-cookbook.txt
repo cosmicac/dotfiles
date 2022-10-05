@@ -49,3 +49,9 @@ ag 'create\(\s+:local_company_value'
 
 # Using xargs to run rubocop/yarn on staged files
 git diff --name-only | xargs yarn prettier-write
+git diff --name-only | xargs rubocop -A
+
+# Using xargs to run tests that have changes.
+# Note '-L 1' forces xargs to run the command once per input line (as opposed to joining the input
+line as the above commands do).
+git diff --name-only | grep _test | xargs -L 1 bundle exec ruby
