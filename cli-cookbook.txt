@@ -55,3 +55,10 @@ git diff --name-only | xargs rubocop -A
 # Note '-L 1' forces xargs to run the command once per input line (as opposed to joining the input
 line as the above commands do).
 git diff --name-only | grep _test | xargs -L 1 bundle exec ruby
+
+# Use sed to add something to every 3rd line for files in a directory (the empty line is
+# intentional)
+sed -i '' "3i\\
+require_relative '../../../lib/operational_scripts'\
+
+" ruby/test/lib/operational_scripts/*.rb
