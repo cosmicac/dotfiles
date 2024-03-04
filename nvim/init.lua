@@ -83,50 +83,20 @@ Plug('pangloss/vim-javascript')
 
 -- Mason - neovim package manager.
 Plug('williamboman/mason.nvim')
+Plug('williamboman/mason-lspconfig.nvim')
+Plug('neovim/nvim-lspconfig')
 
 vim.call('plug#end')
 
+-- Mason setup.
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+-- Ruff LSP
+require('ruff-config')
+
 -- Lualine config
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'dracula',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
-}
+require('lualine-config')
 
 -- Map FZF to <c-p> 
 vim.api.nvim_set_keymap('n', '<c-p>', ':FZF<cr>', { noremap = true })
