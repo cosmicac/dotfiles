@@ -81,10 +81,13 @@ Plug('kyazdani42/nvim-web-devicons')
 -- Javascript syntax highlighting
 Plug('pangloss/vim-javascript')
 
--- Mason - neovim package manager.
+-- Mason - neovim package manager for LSPs
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
+
+-- LSP formatting wrapper, mainly used to format on save
+Plug('lukas-reineke/lsp-format.nvim')
 
 vim.call('plug#end')
 
