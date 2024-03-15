@@ -1,5 +1,5 @@
 [include]
-  path = /Users/tom@affinity.co/software/delta/themes.gitconfig
+  path = /Users/tom@affinity.co/workspace/delta/themes/mocha.gitconfig
 
 [alias]
 
@@ -46,6 +46,7 @@
 [user]
   name = Tom Li
   email = tom@affinity.co
+	signingkey = /Users/tom@affinity.co/.ssh/id_ed25519.pub
 
 [core]
   excludesFile = ~/.gitignore
@@ -59,11 +60,20 @@
   light = false
   line-numbers = true
   side-by-side = true
-  minus-style = 'syntax "#660d19"'
-  plus-style = 'syntax "#137572"'
+  features = catppuccin-mocha
 
 [merge]
   conflictstyle = diff3
+  directoryRenames = true
 
 [diff]
   colorMoved = default
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
