@@ -1,0 +1,36 @@
+-- Check the value of enable_seqscan
+select *
+from pg_settings
+where name like '%seqscan%'
+;
+
+-- Set enable_seqscan to false
+set enable_seqscan
+= false
+;
+
+-- explain with all the options
+explain (analyze, verbose, buffers, settings)
+;
+
+-- vacuum analyze a table
+vacuum(analyze, verbose)
+;
+
+-- find long running queries
+select pid, now() - pg_stat_activity.query_start as duration, query, state
+from pg_stat_activity
+where (now() - pg_stat_activity.query_start) > interval '15 seconds'
+;
+
+
+-- select schema info
+select * from schema_info;
+
+-- update schema info;
+set schema_info = 'new value';
+
+-- check if an alter table statement is blocked
+SELECT wait_event_type, wait_event
+FROM pg_stat_activity
+WHERE state = 'active' AND query LIKE 'ALTER TABLE %';
